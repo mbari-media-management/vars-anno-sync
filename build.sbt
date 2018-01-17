@@ -1,6 +1,7 @@
 lazy val configVersion = "1.3.2"
 lazy val gsonVersion = "2.8.2"
 lazy val guiceVersion = "4.1.0"
+lazy val jerseyVersion = "2.25.1"
 lazy val junitVersion = "4.12"
 lazy val logbackVersion = "1.2.1"
 lazy val rabbitmqVersion = "5.1.2"
@@ -75,7 +76,8 @@ lazy val `vars-anno-sync` = (project in file("."))
     version := "0.1-SNAPSHOT",
     fork := true,
     libraryDependencies ++= Seq(
-      "com.rabbitmq" % "amqp-client" % rabbitmqVersion
+      "com.rabbitmq" % "amqp-client" % rabbitmqVersion,
+      "org.glassfish.jersey.core" % "jersey-client" % jerseyVersion
     )
   )
   .settings(
