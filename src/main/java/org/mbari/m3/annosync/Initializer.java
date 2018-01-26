@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.typesafe.config.Config;
@@ -18,6 +20,7 @@ public class Initializer {
 
     private static Path settingsDirectory;
     private static Config config;
+    public static final Subject<Object> NAME_CHANGE_SUBJECT = PublishSubject.create().toSerialized();
     private static final Logger log = LoggerFactory.getLogger(Initializer.class);
 
     /**
