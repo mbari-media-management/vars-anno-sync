@@ -59,7 +59,7 @@ public class DirectExchangeListener {
             listen();
         }
         catch (Exception e) {
-
+            log.error("Failed to listen to rabbitmq on " + host, e);
         }
     }
 
