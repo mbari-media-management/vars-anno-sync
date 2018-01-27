@@ -15,9 +15,11 @@ public class Main {
         final Config config = Initializer.getConfig();
         //new DirectExchangeListener()
 
+        // TODO grab annosaurus roto in config and use each child as a REST config
         // Use rest to connec to annosaurus and update annotations and associations
-        new org.mbari.m3.annosync.services.annosaurus.v1.AnnotationServiceImpl()
+        //new org.mbari.m3.annosync.services.annosaurus.v1.AnnotationServiceImpl()
 
+        // TODO grab vars root in config and use each child as a database config
         // Use JDBC to connect to VARS and update annotations and associations
         // new org.mbari.m3.annosync.services.varsjdbc.AnnotationServiceImpl
 
