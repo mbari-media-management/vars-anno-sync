@@ -1,5 +1,7 @@
 package org.mbari.m3.annosync.services;
 
+import org.mbari.m3.annosync.ConceptNameChangedMsg;
+
 import java.util.Collection;
 
 /**
@@ -7,6 +9,6 @@ import java.util.Collection;
  */
 public interface AnnotationService {
 
-    public void updateConceptInAnnotations(String newName, Collection<String> oldNames);
+    void handleNameChange(ConceptNameChangedMsg msg);
     
 }

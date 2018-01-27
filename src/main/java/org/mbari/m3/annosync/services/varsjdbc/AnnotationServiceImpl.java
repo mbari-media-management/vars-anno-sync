@@ -3,6 +3,7 @@ package org.mbari.m3.annosync.services.varsjdbc;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 import org.mbari.m3.annosync.ConceptNameChangedMsg;
+import org.mbari.m3.annosync.services.AnnotationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
  * @author Brian Schlining
  * @since 2018-01-26T09:45:00
  */
-public class AnnotationServiceImpl {
+public class AnnotationServiceImpl implements AnnotationService {
 
     private final String url;
     private final String username;
@@ -45,7 +46,7 @@ public class AnnotationServiceImpl {
         this(namechangeBus, url, username, password, null);
     }
 
-    private void handleNameChange(ConceptNameChangedMsg msg) {
+    public void handleNameChange(ConceptNameChangedMsg msg) {
         try {
             Connection connection = DriverManager.getConnection(url, username, password);
             final Statement statement = connection.createStatement();

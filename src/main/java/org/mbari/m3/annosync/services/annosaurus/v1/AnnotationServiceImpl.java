@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 import org.mbari.m3.annosync.ConceptNameChangedMsg;
+import org.mbari.m3.annosync.services.AnnotationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,7 +20,7 @@ import javax.ws.rs.core.MediaType;
  * @author Brian Schlining
  * @since 2018-01-26T11:14:00
  */
-public class AnnotationServiceImpl {
+public class AnnotationServiceImpl implements AnnotationService {
     private final String targetUrl;
     private final String clientSecret;
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -38,7 +39,7 @@ public class AnnotationServiceImpl {
                 .subscribe(this::handleNameChange);
     }
 
-    private void handleNameChange(ConceptNameChangedMsg msg) {
+    public void handleNameChange(ConceptNameChangedMsg msg) {
         final Client client = ClientBuilder.newClient();
         // -- Get Authorization
         String authResponse = client.target(targetUrl)
