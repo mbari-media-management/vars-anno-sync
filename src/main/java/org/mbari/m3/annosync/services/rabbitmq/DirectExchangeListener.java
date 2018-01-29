@@ -10,6 +10,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Consumer;
 import com.rabbitmq.client.DefaultConsumer;
 import com.rabbitmq.client.Envelope;
+import io.reactivex.subjects.Subject;
 import org.mbari.m3.annosync.ConceptNameChangedMsg;
 import org.mbari.m3.annosync.Initializer;
 import org.slf4j.Logger;
@@ -39,9 +40,9 @@ public class DirectExchangeListener {
             .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
             .create();
 
-    public DirectExchangeListener(String host,
-            Integer port, String exchange, String routingKey,
-            String username, String password, String virtualHost) {
+    public DirectExchangeListener(Subject<Object> nameChangeBus, String host,
+                                  Integer port, String exchange, String routingKey,
+                                  String username, String password, String virtualHost) {
         this.host = host;
         this.port = port;
         this.exchange = exchange;
@@ -49,18 +50,19 @@ public class DirectExchangeListener {
         this.username = username;
         this.password = password;
         this.virtualHost = Optional.ofNullable(virtualHost);
-    }
-
-    public DirectExchangeListener(String host,
-            Integer port, String exchange, String routingKey,
-            String username, String password) {
-        this(host, port, exchange, routingKey, username, password, null);
         try {
             listen();
         }
         catch (Exception e) {
             log.error("Failed to listen to rabbitmq on " + host, e);
         }
+    }
+
+    public DirectExchangeListener(Subject<Object> nameChangeBus, String host,
+            Integer port, String exchange, String routingKey,
+            String username, String password) {
+        this(nameChangeBus, host, port, exchange, routingKey, username,
+                password, null);
     }
 
     private void listen() throws Exception {
@@ -90,5 +92,6 @@ public class DirectExchangeListener {
             }
         };
         channel.basicConsume(queueName, true, consumer);
+        log.debug("Connected to RabbitMQ");
     }
 }

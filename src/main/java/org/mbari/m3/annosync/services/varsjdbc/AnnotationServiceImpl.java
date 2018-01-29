@@ -23,7 +23,7 @@ public class AnnotationServiceImpl implements AnnotationService {
     private final String password;
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    public AnnotationServiceImpl(Observable<Object> namechangeBus,
+    public AnnotationServiceImpl(Observable<Object> nameChangeBus,
             String url, String username, String password, String driver) {
         this.url = url;
         this.username = username;
@@ -36,9 +36,10 @@ public class AnnotationServiceImpl implements AnnotationService {
                 e.printStackTrace();
             }
         }
-        namechangeBus.ofType(ConceptNameChangedMsg.class)
+        nameChangeBus.ofType(ConceptNameChangedMsg.class)
                 .observeOn(Schedulers.io())
                 .subscribe(this::handleNameChange);
+        log.debug("Targeting VARS database at " + url);
     }
 
     public AnnotationServiceImpl(Observable<Object> namechangeBus,

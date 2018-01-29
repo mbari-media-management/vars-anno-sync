@@ -37,6 +37,7 @@ public class AnnotationServiceImpl implements AnnotationService {
         nameChangeBus.ofType(ConceptNameChangedMsg.class)
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleNameChange);
+        log.debug("Targeting Annosaurus at " + targetUrl);
     }
 
     public void handleNameChange(ConceptNameChangedMsg msg) {
