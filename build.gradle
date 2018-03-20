@@ -25,9 +25,9 @@ dependencies {
     runtime 'org.glassfish.jaxb:jaxb-runtime:2.3.0'
     runtime 'javax.activation:activation:1.1.1'
     testCompile 'junit:junit:4.12'
-    testRuntime 'org.apache.derby:derbyclient:10.14.1.0'
-    testRuntime 'org.apache.derby:derbynet:10.14.1.0'
-    testRuntime 'org.apache.derby:derby:10.14.1.0'
+    runtime 'org.apache.derby:derbyclient:10.14.1.0'
+    runtime 'org.apache.derby:derbynet:10.14.1.0'
+    runtime 'org.apache.derby:derby:10.14.1.0'
     testRuntime 'net.sourceforge.jtds:jtds:1.3.1'
 }
 
