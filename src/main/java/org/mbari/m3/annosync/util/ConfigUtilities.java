@@ -4,6 +4,9 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigUtil;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +44,17 @@ public class ConfigUtilities {
                     .info("Failed to parse sub-paths below " + path, e);
             return new ArrayList<>();
         }
+    }
+
+    public static File toFile(URL url) {
+        File f;
+        try {
+            f = new File(url.toURI());
+        }
+        catch (URISyntaxException e) {
+            f = new File(url.getPath());
+        }
+        return f;
     }
 
 }

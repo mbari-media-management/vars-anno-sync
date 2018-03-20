@@ -28,7 +28,7 @@ public class AnnotationServiceFactory {
                     .map(path -> {
                         String url = config.getString(path + ".url");
                         Duration timeout = config.getDuration(path + ".timeout");
-                        String secret = config.getString(path + "client.secret");
+                        String secret = config.getString(path + ".client.secret");
                         return new AnnotationServiceImpl(nameChangeBus, url, secret);
                     })
                     .collect(Collectors.toList());

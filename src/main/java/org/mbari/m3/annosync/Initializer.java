@@ -31,13 +31,12 @@ public class Initializer {
      */
     public static Config getConfig() {
         if (config == null) {
+            config = ConfigFactory.load();
             final Path p0 = getSettingsDirectory();
-            final Path path = p0.resolve("vars-kb.conf");
+            final Path path = p0.resolve("vars-anno-sync.conf");
             if (Files.exists(path)) {
-                config = ConfigFactory.parseFile(path.toFile());
-            }
-            else {
-                config = ConfigFactory.load();
+                Config overrideConfig = ConfigFactory.parseFile(path.toFile());
+                config = overrideConfig.withFallback(config);
             }
         }
         return config;

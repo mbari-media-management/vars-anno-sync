@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="vars-anno-sync_integration" target="1.9" />
       <module name="vars-anno-sync_main" target="1.9" />
       <module name="vars-anno-sync_test" target="1.9" />
     </bytecodeTargetLevel>

@@ -34,6 +34,7 @@ public class DirectExchangeListener {
     private final String password;
     private Optional<String> virtualHost;
     private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Subject<Object> nameChangeBus;
 
     private final Gson gson = new GsonBuilder()
             .setPrettyPrinting()
@@ -50,6 +51,7 @@ public class DirectExchangeListener {
         this.username = username;
         this.password = password;
         this.virtualHost = Optional.ofNullable(virtualHost);
+        this.nameChangeBus = nameChangeBus;
         try {
             listen();
         }
@@ -88,7 +90,7 @@ public class DirectExchangeListener {
                         gson.fromJson(message, ConceptNameChangedMsg.class);
 
                 // push data onto EventBus
-                Initializer.NAME_CHANGE_SUBJECT.onNext(conceptNameChangedMsg);
+                nameChangeBus.onNext(conceptNameChangedMsg);
             }
         };
         channel.basicConsume(queueName, true, consumer);

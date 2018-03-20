@@ -59,11 +59,15 @@ public class AnnotationServiceImpl implements AnnotationService {
             String sql0 = "UPDATE Observation SET ConceptName = '" +
                     msg.getNewName() + "' WHERE ConceptName IN (" +
                     oldNames + ")";
-            statement.executeUpdate(sql0);
+            int c0 = statement.executeUpdate(sql0);
+            log.debug("Changed {} Observations from {} to {} at {}", c0,
+                    oldNames, msg.getNewName(), url);
             String sql1 = "UPDATE Association SET ToConcept = '" +
                     msg.getNewName() + "' WHERE ToConcept IN (" +
                     oldNames + ")";
-            statement.executeUpdate(sql1);
+            int c1 = statement.executeUpdate(sql1);
+            log.debug("Changed {} Associations (toConcept) from {} to {} at {}", c1,
+                    oldNames, msg.getNewName(), url);
             statement.close();
             connection.close();
         }
