@@ -42,12 +42,5 @@ public class Main {
         appThread.setDaemon(false);
         appThread.start();
 
-        Console c = System.console();
-        if (c != null) {
-            // printf-like arguments
-            c.format("\nPress ENTER to exit.\n");
-            c.readLine();
-        }
-
     }
 }

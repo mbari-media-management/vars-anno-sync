@@ -4,14 +4,14 @@ MAINTAINER Brian Schlining <bschlining@gmail.com>
 
 ENV APP_HOME /opt/vars-anno-sync
 
-RUN mkdir -p ${APP_HOME}
+RUN mkdir -p /opt
 
-COPY build/distributions/vars-anno-sync-*.zip ${APP_HOME}
+COPY build/distributions/vars-anno-sync-*.zip /opt
 
-RUN unzip ${APP_HOME}/*.zip && \
-  rm ${APP_HOME}/*.zip && \
-  cp -R vars-anno-sync-*/ ${APP_HOME} && \
-  rm -rf vars-anno-sync-*
+WORKDIR /opt
 
-ENTRYPOINT ${APP_HOME}/bin/vars-anno-sync
+RUN unzip *.zip && \
+  rm *.zip && \
+  ln -s vars-anno-sync-*/ vars-anno-sync
 
+CMD ${APP_HOME}/bin/main.sh
